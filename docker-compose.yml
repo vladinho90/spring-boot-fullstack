@@ -1,7 +1,7 @@
 services:
   db:
     container_name: postgres
-    image: postgres:14.5
+    image: postgres:15.2
     environment:
       POSTGRES_USER: amigoscode
       POSTGRES_PASSWORD: password
@@ -26,6 +26,18 @@ services:
     depends_on:
       - db
     restart: unless-stopped
+
+  amigoscode-react:
+    container_name: amigoscode-react
+    image: vladinho1990/amigoscode-react
+    build:
+      context: frontend/react
+    ports:
+      - "3000:5173"
+    depends_on:
+      - amigoscode-api
+    restart: unless-stopped
+
 
   pgadmin:
     container_name: pgadmin
