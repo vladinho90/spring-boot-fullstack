@@ -21,7 +21,7 @@
     },
     {
       "name": "amigoscode-react",
-      "image": "vladinho1990/amigoscode-react:latest",
+      "image": "vladinho1990/amigoscode-react:23.04.2023.08.17.27",
       "essential": true,
       "memory": 256,
       "portMappings": [
