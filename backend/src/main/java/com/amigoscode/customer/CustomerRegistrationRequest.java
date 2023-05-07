@@ -3,7 +3,6 @@ package com.amigoscode.customer;
 public record CustomerRegistrationRequest(
         String name,
         String email,
-        Integer age,
-        Gender gender
+        String password, Gender gender, Integer age
 ) {
 }

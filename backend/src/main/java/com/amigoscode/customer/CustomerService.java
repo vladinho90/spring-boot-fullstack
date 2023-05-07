@@ -4,26 +4,35 @@ import com.amigoscode.exceptions.DuplicateResourceException;
 import com.amigoscode.exceptions.RequestValidationException;
 import com.amigoscode.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class CustomerService {
 
     private final CustomerDao customerDao;
+    private final CustomerDTOMapper customerDTOMapper;
+    private final PasswordEncoder passwordEncoder;
 
-    public CustomerService(@Qualifier("jpa") CustomerDao customerDao) {
+    public CustomerService(@Qualifier("jpa") CustomerDao customerDao, CustomerDTOMapper customerDTOMapper, PasswordEncoder passwordEncoder) {
         this.customerDao = customerDao;
+        this.customerDTOMapper = customerDTOMapper;
+        this.passwordEncoder = passwordEncoder;
     }
 
-    public List<Customer> getAllCustomers() {
-        return customerDao.selectAllCustomers();
+    public List<CustomerDTO> getAllCustomers() {
+        return customerDao.selectAllCustomers().stream()
+                .map(customerDTOMapper::apply).collect(Collectors.toList());
     }
 
-    public Customer getCustomer(Integer customerId) {
-        return customerDao.selectCustomerById(customerId).orElseThrow(
-                () -> new ResourceNotFoundException("customer with id [%s] not found".formatted(customerId)));
+    public CustomerDTO getCustomer(Integer customerId) {
+        return customerDao.selectCustomerById(customerId)
+                .map(customerDTOMapper::apply)
+                .orElseThrow(
+                        () -> new ResourceNotFoundException("customer with id [%s] not found".formatted(customerId)));
     }
 
     public void addCustomer(CustomerRegistrationRequest customerRegistrationRequest) {
@@ -34,8 +43,10 @@ public class CustomerService {
         Customer newCustomer = new Customer(
                 customerRegistrationRequest.name(),
                 customerRegistrationRequest.email(),
-                customerRegistrationRequest.age(),
-                customerRegistrationRequest.gender());
+                passwordEncoder.encode(customerRegistrationRequest.password()),
+                customerRegistrationRequest.gender(),
+                customerRegistrationRequest.age()
+        );
 
         customerDao.insertCustomer(newCustomer);
     }
@@ -48,7 +59,9 @@ public class CustomerService {
     }
 
     public void updateCustomer(Integer customerId, CustomerUpdateRequest updateRequest) {
-        Customer customer = getCustomer(customerId);
+
+        Customer customer = customerDao.selectCustomerById(customerId).orElseThrow(
+                        () -> new ResourceNotFoundException("customer with id [%s] not found".formatted(customerId)));
 
         boolean changes = false;
 

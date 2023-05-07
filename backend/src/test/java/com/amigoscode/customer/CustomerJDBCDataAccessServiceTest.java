@@ -29,8 +29,8 @@ class CustomerJDBCDataAccessServiceTest extends AbstractTestcontainers {
         Customer customer = new Customer(
                 FAKER.name().fullName(),
                 FAKER.internet().safeEmailAddress() + "-" + UUID.randomUUID(),
-                20,
-                Gender.MALE);
+                "password", Gender.MALE, 20
+        );
         underTest.insertCustomer(customer);
 
         //When
@@ -47,8 +47,8 @@ class CustomerJDBCDataAccessServiceTest extends AbstractTestcontainers {
         Customer customer = new Customer(
                 FAKER.name().fullName(),
                 email,
-                20,
-                Gender.MALE);
+                "password", Gender.MALE, 20
+        );
         underTest.insertCustomer(customer);
         int id = underTest.selectAllCustomers()
                 .stream()
@@ -88,8 +88,8 @@ class CustomerJDBCDataAccessServiceTest extends AbstractTestcontainers {
         Customer customer = new Customer(
                 FAKER.name().fullName(),
                 email,
-                20,
-                Gender.MALE);
+                "password", Gender.MALE, 20
+        );
         int beforeInsertionSize = underTest.selectAllCustomers().size();
 
         //When
@@ -107,8 +107,8 @@ class CustomerJDBCDataAccessServiceTest extends AbstractTestcontainers {
         Customer customer = new Customer(
                 FAKER.name().fullName(),
                 email,
-                20,
-                Gender.MALE);
+                "password", Gender.MALE, 20
+        );
         underTest.insertCustomer(customer);
 
         //When
@@ -137,8 +137,8 @@ class CustomerJDBCDataAccessServiceTest extends AbstractTestcontainers {
         Customer customer = new Customer(
                 FAKER.name().fullName(),
                 email,
-                20,
-                Gender.MALE);
+                "password", Gender.MALE, 20
+        );
         underTest.insertCustomer(customer);
 
         int id = underTest.selectAllCustomers()
@@ -174,8 +174,8 @@ class CustomerJDBCDataAccessServiceTest extends AbstractTestcontainers {
         Customer customer = new Customer(
                 FAKER.name().fullName(),
                 email,
-                20,
-                Gender.MALE);
+                "password", Gender.MALE, 20
+        );
         underTest.insertCustomer(customer);
 
         int id = underTest.selectAllCustomers()
@@ -200,7 +200,7 @@ class CustomerJDBCDataAccessServiceTest extends AbstractTestcontainers {
         Customer customer = new Customer(
                 FAKER.name().fullName(),
                 email,
-                20, Gender.MALE);
+                "password", Gender.MALE, 20);
 
         underTest.insertCustomer(customer);
 
@@ -238,7 +238,7 @@ class CustomerJDBCDataAccessServiceTest extends AbstractTestcontainers {
         Customer customer = new Customer(
                 FAKER.name().fullName(),
                 email,
-                20, Gender.MALE);
+                "password", Gender.MALE, 20);
 
         underTest.insertCustomer(customer);
 
@@ -277,7 +277,7 @@ class CustomerJDBCDataAccessServiceTest extends AbstractTestcontainers {
         Customer customer = new Customer(
                 FAKER.name().fullName(),
                 email,
-                20, Gender.MALE);
+                "password", Gender.MALE, 20);
 
         underTest.insertCustomer(customer);
 
@@ -315,8 +315,8 @@ class CustomerJDBCDataAccessServiceTest extends AbstractTestcontainers {
         Customer customer = new Customer(
                 FAKER.name().fullName(),
                 email,
-                20,
-                Gender.MALE);
+                "password", Gender.MALE, 20
+        );
 
         underTest.insertCustomer(customer);
 
@@ -356,7 +356,7 @@ class CustomerJDBCDataAccessServiceTest extends AbstractTestcontainers {
         Customer customer = new Customer(
                 FAKER.name().fullName(),
                 email,
-                20, Gender.MALE);
+                "password", Gender.MALE, 20);
 
         underTest.insertCustomer(customer);
 
