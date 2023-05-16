@@ -11,14 +11,14 @@ const AuthProvider = ({children}) => {
 
     useEffect(() => {
         let token = localStorage.getItem("access_token");
-        if(token){
+        if (token) {
             token = jwtDecode(token);
             setCustomer({
                 username: token.sub,
                 roles: token.scopes
             })
         }
-    },[]);
+    }, []);
 
     const login = async (usernameAndPassword) => {
         return new Promise((resolve, reject) => {
@@ -45,14 +45,14 @@ const AuthProvider = ({children}) => {
 
     const isCustomerAuthenticated = () => {
         const token = localStorage.getItem("access_token");
-        if(!token){
+        if (!token) {
             return false;
         }
 
         const {exp: expiration} = jwtDecode(token);
 
         console.log('decoded token', jwtDecode(token));
-        if(Date.now()> expiration * 1000){
+        if (Date.now() > expiration * 1000) {
             logOut();
             return false;
         }
