@@ -1,7 +1,7 @@
-import {Formik, Form, useField} from 'formik';
+import {Form, Formik, useField} from 'formik';
 import * as Yup from 'yup';
-import {Alert, AlertIcon, Box, Button, FormLabel, Input, Select, Stack} from "@chakra-ui/react";
-import {saveCustomer, updateCustomer} from "../../services/client.js";
+import {Alert, AlertIcon, Box, Button, FormLabel, Input, Stack} from "@chakra-ui/react";
+import {updateCustomer} from "../../services/client.js";
 import {errorNotification, successNotification} from "../../services/notification.js";
 
 const MyTextInput = ({label, ...props}) => {
@@ -64,7 +64,7 @@ const UpdateCustomerForm = ({fetchCustomers, initialValues, customerId}) => {
                     })
                 }}
             >
-                {({isValid, isSubmitting,dirty}) => (
+                {({isValid, isSubmitting, dirty}) => (
                     <Form>
                         <Stack spacing={"24px"}>
                             <MyTextInput
@@ -88,7 +88,7 @@ const UpdateCustomerForm = ({fetchCustomers, initialValues, customerId}) => {
                                 placeholder="20"
                             />
 
-                            <Button isDisabled={!(isValid && dirty)|| isSubmitting} type="submit">Submit</Button>
+                            <Button isDisabled={!(isValid && dirty) || isSubmitting} type="submit">Submit</Button>
                         </Stack>
                     </Form>
                 )}
