@@ -35,9 +35,12 @@ public class Main {
             Customer customer = new Customer(
                     firstName + " " + lastName,
                     email,
-                    passwordEncoder.encode(UUID.randomUUID().toString()), gender, age
+                    passwordEncoder.encode("password"),
+                    gender,
+                    age
             );
 
+            System.out.println(email);
 
             customerRepository.save(customer);
         };

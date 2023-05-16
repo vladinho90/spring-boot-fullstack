@@ -31,7 +31,8 @@ public class JWTUtil {
     }
 
     public String issueToken(String subject, Map<String, Object> claims) {
-        String token = Jwts
+
+        return Jwts
                 .builder()
                 .setClaims(claims)
                 .setSubject(subject)
@@ -40,8 +41,6 @@ public class JWTUtil {
                 .setExpiration(Date.from(Instant.now().plus(15, ChronoUnit.DAYS)))
                 .signWith(getSigningKey(), SignatureAlgorithm.HS256)
                 .compact();
-
-        return token;
     }
 
     public String getSubject(String token) {
