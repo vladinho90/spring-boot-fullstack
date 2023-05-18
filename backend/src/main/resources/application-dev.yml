@@ -5,7 +5,7 @@ server:
 
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/customer
+    url: jdbc:postgresql://awseb-e-jsq2ebisrq-stack-awsebrdsdatabase-dkuyxkmdcgjs.czrh0ffsbxev.eu-north-1.rds.amazonaws.com:5432/ebdb
     username: amigoscode
     password: password
   jpa:

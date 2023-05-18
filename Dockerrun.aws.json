@@ -8,26 +8,14 @@
       "memory": 512,
       "portMappings": [
         {
-          "hostPort": 8080,
+          "hostPort": 80,
           "containerPort": 8080
         }
       ],
       "environment": [
         {
           "name": "SPRING_DATASOURCE_URL",
-          "value": "jdbc:postgresql://awseb-e-jnrsyrqytm-stack-awsebrdsdatabase-z5gisa0nc23p.czrh0ffsbxev.eu-north-1.rds.amazonaws.com:5432/customer"
-        }
-      ]
-    },
-    {
-      "name": "amigoscode-react",
-      "image": "vladinho1990/amigoscode-react:16.05.2023.14.24.10",
-      "essential": true,
-      "memory": 256,
-      "portMappings": [
-        {
-          "hostPort": 80,
-          "containerPort": 5173
+          "value": "jdbc:postgresql://awseb-e-jsq2ebisrq-stack-awsebrdsdatabase-dkuyxkmdcgjs.czrh0ffsbxev.eu-north-1.rds.amazonaws.com:5432/ebdb"
         }
       ]
     }
