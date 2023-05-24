@@ -9,7 +9,7 @@ import {
     HStack,
     Icon,
     IconButton,
-    Image,
+    Image, Link,
     Menu,
     MenuButton,
     MenuDivider,
@@ -21,15 +21,13 @@ import {
     VStack
 } from '@chakra-ui/react';
 
-import {FiBell, FiChevronDown, FiCompass, FiHome, FiMenu, FiSettings, FiStar, FiTrendingUp} from 'react-icons/fi';
+import {FiBell, FiChevronDown, FiHome, FiMenu, FiSettings, FiUsers} from 'react-icons/fi';
 import {useAuth} from "../context/AuthContext.jsx";
 
 const LinkItems = [
-    {name: 'Home', icon: FiHome},
-    {name: 'Trending', icon: FiTrendingUp},
-    {name: 'Explore', icon: FiCompass},
-    {name: 'Favourites', icon: FiStar},
-    {name: 'Settings', icon: FiSettings},
+    {name: 'Home', route: '/dashboard', icon: FiHome},
+    {name: 'Customers', route: '/dashboard/customers',  icon: FiUsers},
+    {name: 'Settings', route: '/dashboard/settings', icon: FiSettings},
 ];
 
 export default function SidebarWithHeader({children}) {
@@ -86,7 +84,7 @@ const SidebarContent = ({onClose, ...rest}) => {
                 <CloseButton display={{base: 'flex', md: 'none'}} onClick={onClose}/>
             </Flex>
             {LinkItems.map((link) => (
-                <NavItem key={link.name} icon={link.icon}>
+                <NavItem key={link.name} route={link.route} icon={link.icon}>
                     {link.name}
                 </NavItem>
             ))}
@@ -94,34 +92,35 @@ const SidebarContent = ({onClose, ...rest}) => {
     );
 };
 
-const NavItem = ({icon, children, ...rest}) => {
+const NavItem = ({icon, route, children, ...rest}) => {
     return (
-        // <Link href="frontend/react/src/components/shared#" style={{textDecoration: 'none'}} _focus={{boxShadow: 'none'}}>
-        <Flex
-            align="center"
-            p="4"
-            mx="4"
-            borderRadius="lg"
-            role="group"
-            cursor="pointer"
-            _hover={{
-                bg: 'green.400',
-                color: 'white',
-            }}
-            {...rest}>
-            {icon && (
-                <Icon
-                    mr="4"
-                    fontSize="16"
-                    _groupHover={{
-                        color: 'white',
-                    }}
-                    as={icon}
-                />
-            )}
-            {children}
-        </Flex>
-        // </Link>
+        <Link href={`${route}`} style={{textDecoration: 'none'}}
+              _focus={{boxShadow: 'none'}}>
+            <Flex
+                align="center"
+                p="4"
+                mx="4"
+                borderRadius="lg"
+                role="group"
+                cursor="pointer"
+                _hover={{
+                    bg: 'green.400',
+                    color: 'white',
+                }}
+                {...rest}>
+                {icon && (
+                    <Icon
+                        mr="4"
+                        fontSize="16"
+                        _groupHover={{
+                            color: 'white',
+                        }}
+                        as={icon}
+                    />
+                )}
+                {children}
+            </Flex>
+        </Link>
     );
 };
 
